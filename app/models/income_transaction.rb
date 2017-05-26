@@ -1,0 +1,3 @@
+class IncomeTransaction < Transaction
+	
+end

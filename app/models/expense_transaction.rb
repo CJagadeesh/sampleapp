@@ -1,0 +1,3 @@
+class ExpenseTransaction < Transaction
+	
+end
