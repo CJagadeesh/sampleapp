@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  resources :transactions
+  resources :transactions do 
+  	get :download_pdf, on: :collection
+  end
   devise_for :users
+  root to: 'transactions#index'
   get 'transactions/new'
   get 'transactions/show'
   get 'transactions/edit'

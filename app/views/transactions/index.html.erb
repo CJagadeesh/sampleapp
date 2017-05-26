@@ -26,8 +26,9 @@
   </tbody>
 </table>
 
-<b>Total availabe balance:</b> <%= IncomeTransaction.sum(:amount) - ExpenseTransaction.sum(:amount).to_f %>
+<b>Total availabe balance:</b> <%= IncomeTransaction.where(user_id: current_user.id).sum(:amount) - ExpenseTransaction.where(user_id: current_user.id).sum(:amount).to_f %>
 
 <br>
 
 <%= link_to 'New Transaction', new_transaction_path %>
+<%= link_to 'Download PDF', download_pdf_transactions_path(format: :pdf) %>

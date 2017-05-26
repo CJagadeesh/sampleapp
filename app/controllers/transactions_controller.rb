@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all
+    @transactions = current_user.transactions
   end
 
   # GET /transactions/1
@@ -14,7 +14,7 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    @transaction = Transaction.new
+    @transaction = current_user.transactions.new
   end
 
   # GET /transactions/1/edit
@@ -24,7 +24,7 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
+    @transaction = current_user.transactions.new(transaction_params)
 
     respond_to do |format|
       if @transaction.save
@@ -42,7 +42,7 @@ class TransactionsController < ApplicationController
   def update
     respond_to do |format|
       if @transaction.update(transaction_params)
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
+        format.html { redirect_to transaction_path(@transaction), notice: 'Transaction was successfully updated.' }
         format.json { render :show, status: :ok, location: @transaction }
       else
         format.html { render :edit }
@@ -61,10 +61,20 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def download_pdf
+   @transactions = current_user.transactions
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "transactions", layout: false   # Excluding ".pdf" extension.
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
-      @transaction = Transaction.find(params[:id])
+      @transaction = current_user.transactions.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

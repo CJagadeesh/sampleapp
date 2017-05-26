@@ -3,5 +3,5 @@ class UserController < ApplicationController
   end
   def new
   end
-  
+
 end
