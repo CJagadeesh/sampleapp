@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :transactions do 
   	get :download_pdf, on: :collection
+  	get :download_csv, on: :collection
   end
   devise_for :users
   root to: 'transactions#index'

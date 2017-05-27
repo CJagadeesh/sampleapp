@@ -71,6 +71,14 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def download_csv
+    respond_to do |format|
+      format.html
+      format.csv { render text: Transaction.to_csv(current_user.id) }
+    end
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
