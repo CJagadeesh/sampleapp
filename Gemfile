@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'devise'
+gem 'pg'
 
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
